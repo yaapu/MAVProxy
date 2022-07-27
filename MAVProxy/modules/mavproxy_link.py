@@ -749,7 +749,8 @@ class LinkModule(mp_module.MPModule):
                                       mavutil.mavlink.MAV_CMD_DO_DIGICAM_CONTROL]):
                     self.mpstate.console.writeln("Got COMMAND_ACK: %s: %s" % (cmd, res))
             except Exception:
-                self.mpstate.console.writeln("Got MAVLink msg: %s" % m)
+                pass
+#                self.mpstate.console.writeln("Got MAVLink msg: %s" % m)
 
             if m.command == mavutil.mavlink.MAV_CMD_PREFLIGHT_CALIBRATION:
                 if m.result == mavutil.mavlink.MAV_RESULT_ACCEPTED:
@@ -768,17 +769,18 @@ class LinkModule(mp_module.MPModule):
                 t = t[12:]
                 res = mavutil.mavlink.enums["MAV_MISSION_RESULT"][m.type].name
                 res = res[12:]
-                self.mpstate.console.writeln("Got MISSION_ACK: %s: %s" % (t, res))
+#               self.mpstate.console.writeln("Got MISSION_ACK: %s: %s" % (t, res))
             except Exception as e:
-                self.mpstate.console.writeln("Got MAVLink msg: %s" % m)
+#                self.mpstate.console.writeln("Got MAVLink msg: %s" % m)
+                pass
         else:
-            #self.mpstate.console.writeln("Got MAVLink msg: %s" % m)
+#            self.mpstate.console.writeln("Got MAVLink msg: %s" % m)
             pass
 
         if self.status.watch is not None:
             for msg_type in self.status.watch:
                 if fnmatch.fnmatch(mtype.upper(), msg_type.upper()):
-                    self.mpstate.console.writeln('< '+ str(m))
+                    #self.mpstate.console.writeln('< '+ str(m))
                     break
 
     def mavlink_packet(self, msg):
